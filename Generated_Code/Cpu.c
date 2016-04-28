@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : KL25P80M48SF0RM, Rev.3, Sep 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-04-27, 01:55, # CodeGen: 18
+**     Date/Time   : 2016-04-28, 00:24, # CodeGen: 20
 **     Abstract    :
 **
 **     Settings    :
@@ -278,6 +278,8 @@
 #include "Rx1.h"
 #include "DA1.h"
 #include "DacLdd1.h"
+#include "AD1.h"
+#include "AdcLdd1.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
@@ -715,21 +717,6 @@ PE_ISR(Cpu_ivINT_UART2)
 
 /*
 ** ===================================================================
-**     Method      :  Cpu_Cpu_ivINT_ADC0 (component MKL25Z128LK4)
-**
-**     Description :
-**         This ISR services an unused interrupt/exception vector.
-**         This method is internal. It is used by Processor Expert only.
-** ===================================================================
-*/
-PE_ISR(Cpu_ivINT_ADC0)
-{
-  /* This code can be changed using the CPU component property "Build Options / Unhandled int code" */
-  PE_DEBUGHALT();
-}
-
-/*
-** ===================================================================
 **     Method      :  Cpu_Cpu_ivINT_CMP0 (component MKL25Z128LK4)
 **
 **     Description :
@@ -1129,6 +1116,8 @@ void PE_low_level_init(void)
   (void)USB1_Init();
   /* ### DAC_LDD "DacLdd1" component auto initialization. Auto initialization feature can be disabled by component's property "Auto initialization". */
   (void)DacLdd1_Init(NULL);
+  /* ### ADC "AD1" init code ... */
+  AD1_Init();
   __EI();
 }
   /* Flash configuration field */

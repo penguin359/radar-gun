@@ -6,7 +6,7 @@
 **     Version     : Component 01.025, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2016-04-27, 01:55, # CodeGen: 18
+**     Date/Time   : 2016-04-28, 00:24, # CodeGen: 20
 **     Abstract    :
 **
 **     Settings    :
@@ -85,6 +85,8 @@
 #include "Rx1.h"
 #include "DA1.h"
 #include "DacLdd1.h"
+#include "AD1.h"
+#include "AdcLdd1.h"
 
 
 /*

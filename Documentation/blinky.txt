@@ -220,6 +220,25 @@ Module "USB1"      (component FSL_USB_Stack)
 Module "DA1"       (component DAC)
    - DA1_SetValue -This method sets values of all channels.
 
+Module "AD1"       (component ADC)
+   - AD1_Start -This method starts continuous conversion on all channels that are set in the component inspector. When each 
+                measurement on all channels has finished the <OnEnd > event may be invoked. This method is not available if the 
+                <interrupt service> is disabled and the device doesn't support the continuous mode. Note: If time of 
+                measurement is too short and the instruction clock is too slow then the conversion complete interrupt and its 
+                handler may cause a system overflow.
+   - AD1_Stop -This method stops the continuous measurement or disables a trigger mode (if supported by HW), which has been 
+                started by one of the following methods:  [ Version specific information not for Freescale 56800 and HCS08 and 
+                HC08 and HCS12 and HCS12X derivatives ]     - <Start>     - EnableInt(Chan)Trigger     - EnableExt(Chan)Trigger 
+                The Stop method is available if one of the previously mentioned methods is supported by A/D converter device 
+                and is enabled to be generated.
+   - AD1_Measure -This method performs one measurement on all channels that are set in the component inspector. (Note: If the 
+                <number of conversions> is more than one the conversion of A/D channels is performed specified number of times.)
+   - AD1_GetValue16 -This method returns the last measured values of all channels. Compared with <GetValue> method this method 
+                returns more accurate result if the <number of conversions> is greater than 1 and <AD resolution> is less than 
+                16 bits. In addition, the user code dependency on <AD resolution> is eliminated.
+   - AD1_Calibrate -This method starts self calibration process. Calibration is typically used to remove the effects of the 
+                gain and offset from a specific reading.
+
 Module "Cpu"       (component MKL25Z128LK4)
 
 ===================================================================================

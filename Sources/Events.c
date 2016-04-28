@@ -81,7 +81,7 @@ void TI1_OnInterrupt(void)
 	  val = (uint16_t)((50 - count)*4095UL/25UL);
   else
 	  val = (uint16_t)((count)*4095UL/25UL);
-  DA1_SetValue(&val);
+  //DA1_SetValue(&val);
 
   /*
   static bool green = false;
@@ -92,6 +92,44 @@ void TI1_OnInterrupt(void)
   }
   green = !green;
   */
+}
+
+/*
+** ===================================================================
+**     Event       :  AD1_OnEnd (module Events)
+**
+**     Component   :  AD1 [ADC]
+**     Description :
+**         This event is called after the measurement (which consists
+**         of <1 or more conversions>) is/are finished.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void AD1_OnEnd(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  AD1_OnCalibrationEnd (module Events)
+**
+**     Component   :  AD1 [ADC]
+**     Description :
+**         This event is called when the calibration has been finished.
+**         User should check if the calibration pass or fail by
+**         Calibration status method./nThis event is enabled only if
+**         the <Interrupt service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void AD1_OnCalibrationEnd(void)
+{
+  /* Write your code here ... */
 }
 
 /* END Events */
