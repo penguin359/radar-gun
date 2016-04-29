@@ -3,7 +3,7 @@
   <Header>
     <Name>blinky</Name>
     <SavedBy>lorenl</SavedBy>
-    <ModificationStamp>20</ModificationStamp>
+    <ModificationStamp>21</ModificationStamp>
     <Date>2016-04-16</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1550-0615</PEversion>
@@ -4469,9 +4469,9 @@
       <ItemId5>10</ItemId5>
       <Value5>true</Value5>
       <ItemId6>12</ItemId6>
-      <Value6>true</Value6>
+      <Value6>false</Value6>
       <ItemId7>14</ItemId7>
-      <Value7>true</Value7>
+      <Value7>false</Value7>
       <ItemId8>15</ItemId8>
       <Value8>true</Value8>
       <ItemId9>16</ItemId9>
@@ -4485,9 +4485,9 @@
       <ItemId13>24</ItemId13>
       <Value13>true</Value13>
       <ItemId14>29</ItemId14>
-      <Value14>true</Value14>
+      <Value14>false</Value14>
       <ItemId15>31</ItemId15>
-      <Value15>true</Value15>
+      <Value15>false</Value15>
     </BoolList_BeanConfig>
     <BoolList_TaskConfig>
       <Count>0</Count>
@@ -6568,7 +6568,7 @@
     <BeanType>TimerInt</BeanType>
     <Name>TI1</Name>
     <CompNumb>12</CompNumb>
-    <CompEnabled>true</CompEnabled>
+    <CompEnabled>false</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
     <IconName>TMRCNTR</IconName>
     <UserFolderName />
@@ -6890,7 +6890,7 @@
               <ItemSymbol>IntPeriodTmg</ItemSymbol>
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
-              <Value>init:1 ms;prec:5%;RTS:none;clksrc_presc[SpeedMode0]Auto select;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
+              <Value>1 ms</Value>
               <RuntimeSetting>0</RuntimeSetting>
               <ReqDevPrescHigh>-1</ReqDevPrescHigh>
               <ReqDevPrescLow>-1</ReqDevPrescLow>
@@ -7495,7 +7495,7 @@
     <BeanType>TimerUnit_LDD</BeanType>
     <Name>TU1</Name>
     <CompNumb>14</CompNumb>
-    <CompEnabled>true</CompEnabled>
+    <CompEnabled>false</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
     <IconName>CLOCKS_LDD</IconName>
     <UserFolderName>Referenced_Components</UserFolderName>
@@ -7694,7 +7694,7 @@
         <ItemSymbol>Tmg_Period</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>init:1 ms;prec:5%;RTS:none;clksrc_presc[SpeedMode0]Auto select;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
+        <Value>1 ms</Value>
         <RuntimeSetting>0</RuntimeSetting>
         <ReqDevPrescHigh>-1</ReqDevPrescHigh>
         <ReqDevPrescLow>-1</ReqDevPrescLow>
@@ -7774,7 +7774,7 @@
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
         <Value>false</Value>
-        <Expanded>true</Expanded>
+        <Expanded>false</Expanded>
       </ItemState>
       <ItemState>
         <ItemSymbol>CounterInt</ItemSymbol>
@@ -8276,10 +8276,10 @@
         <ReadOnly>true</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>true</Value>
-        <Expanded>true</Expanded>
+        <Value>false</Value>
+        <Expanded>false</Expanded>
         <LastSelection>true</LastSelection>
-        <LastUserSel>yes</LastUserSel>
+        <LastUserSel>never</LastUserSel>
       </ItemState>
       <ItemState>
         <ItemSymbol>OnCounterRestartName</ItemSymbol>
@@ -15573,7 +15573,7 @@
     <BeanType>DAC</BeanType>
     <Name>DA1</Name>
     <CompNumb>29</CompNumb>
-    <CompEnabled>true</CompEnabled>
+    <CompEnabled>false</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
     <IconName>icon</IconName>
     <UserFolderName />
@@ -17155,7 +17155,7 @@
     <BeanType>ADC</BeanType>
     <Name>AD1</Name>
     <CompNumb>31</CompNumb>
-    <CompEnabled>true</CompEnabled>
+    <CompEnabled>false</CompEnabled>
     <GenCodeMode>ALWAYS_WRITE</GenCodeMode>
     <IconName>AD</IconName>
     <UserFolderName />
@@ -17620,7 +17620,7 @@
               <ItemSymbol>_CnvTmg</ItemSymbol>
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
-              <Value>init:4.166667 µs;prec:5%;RTS:none;clksrc_presc[SpeedMode0]Auto select;extcomp_presc[SpeedMode0]25;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
+              <Value>4.166667 µs</Value>
               <RuntimeSetting>0</RuntimeSetting>
               <ReqDevPrescHigh>-1</ReqDevPrescHigh>
               <ReqDevPrescLow>-1</ReqDevPrescLow>

@@ -73,7 +73,7 @@ static const int32_t fftDC[] = {
 
 static const int log2NDC = 6;
 
-static const int32_t din1Hz[] = {
+int32_t din1Hz[] = {
 	          0,           0, 	  210490206,           0,
 	  418953276,           0, 	  623381598,           0,
 	  821806413,           0, 	 1012316784,           0,
@@ -145,7 +145,7 @@ static const int32_t fft1Hz[] = {
 
 static const int log2N1Hz = 6;
 
-static const int32_t din1HzShort[] = {
+int32_t din1HzShort[] = {
 	          0,           0, 	 2147483647,           0,
 	          0,           0, 	-2147483648,           0,
 };
@@ -157,7 +157,7 @@ static const int32_t fft1HzShort[] = {
 
 static const int log2N1HzShort = 2;
 
-static const int32_t dinMulti[] = {
+int32_t dinMulti[] = {
 	          0,           0, 	  890666197,           0,
 	 1585853333,           0, 	 1948397530,           0,
 	 1938747783,           0, 	 1622583880,           0,
@@ -229,7 +229,7 @@ static const int32_t fftMulti[] = {
 
 static const int log2NMulti = 6;
 
-static const int32_t din50ms[] = {
+int32_t din50ms[] = {
 	          0,           0, 	 2127050522,           0,
 	  585449903,           0, 	-1965911148,           0,
 	-1126547765,           0, 	 1655839867,           0,
@@ -2285,7 +2285,7 @@ static const int32_t fft50ms[] = {
 
 static const int log2N50ms = 11;
 
-static const int32_t din20ms[] = {
+int32_t din20ms[] = {
 	          0,           0, 	 1162780288,           0,
 	 1955157788,           0, 	 2124721240,           0,
 	 1617456335,           0, 	  594951927,           0,
@@ -2798,6 +2798,7 @@ static const int32_t din20ms[] = {
 	-2056916560,           0, 	-2063423908,           0,
 	-1412629117,           0, 	 -311842381,           0,
 	  888281512,           0, 	 1805443995,           0,
+#if 0
 	 2147483647,           0, 	 1805443995,           0,
 	  888281512,           0, 	 -311842381,           0,
 	-1412629117,           0, 	-2063423908,           0,
@@ -3310,6 +3311,7 @@ static const int32_t din20ms[] = {
 	 -617073971,           0, 	  594951927,           0,
 	 1617456335,           0, 	 2124721240,           0,
 	 1955157788,           0, 	 1162780288,           0,
+#endif
 };
 
 static const int32_t fft20ms[] = {
@@ -4341,7 +4343,7 @@ static const int32_t fft20ms[] = {
 
 static const int log2N20ms = 11;
 
-static const int32_t din20msNoise[] = {
+int32_t din20msNoise[] = {
 	  950466090,           0, 	  451764532,           0,
 	  671386342,           0, 	   45866184,           0,
 	  463565111,           0, 	 -187499908,           0,
@@ -6397,7 +6399,7 @@ static const int32_t fft20msNoise[] = {
 
 static const int log2N20msNoise = 11;
 
-static const int32_t din20msBigNoise[] = {
+int32_t din20msBigNoise[] = {
 	 -102646451,           0, 	 -117027057,           0,
 	  597018688,           0, 	   27707402,           0,
 	    6122772,           0, 	  166945523,           0,
@@ -8453,7 +8455,7 @@ static const int32_t fft20msBigNoise[] = {
 
 static const int log2N20msBigNoise = 11;
 
-static const int32_t din20msGiantNoise[] = {
+int32_t din20msGiantNoise[] = {
 	    1148935,           0, 	-1344860569,           0,
 	  450707639,           0, 	 -815611866,           0,
 	  155254700,           0, 	  451844572,           0,
@@ -10509,7 +10511,7 @@ static const int32_t fft20msGiantNoise[] = {
 
 static const int log2N20msGiantNoise = 11;
 
-static const int32_t din20ms10m_up[] = {
+int32_t din20ms10m_up[] = {
 	          0,           0, 	 1162780288,           0,
 	 1955157788,           0, 	 2124721240,           0,
 	 1617456335,           0, 	  594951927,           0,
@@ -12565,7 +12567,7 @@ static const int32_t fft20ms10m_up[] = {
 
 static const int log2N20ms10m_up = 11;
 
-static const int32_t din20ms10m_down[] = {
+int32_t din20ms10m_down[] = {
 	          0,           0, 	 1162780288,           0,
 	 1955157788,           0, 	 2124721240,           0,
 	 1617456335,           0, 	  594951927,           0,

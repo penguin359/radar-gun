@@ -38,9 +38,6 @@
 #include "BitIoLdd3.h"
 #include "WAIT1.h"
 #include "KSDK1.h"
-#include "TI1.h"
-#include "TimerIntLdd1.h"
-#include "TU1.h"
 #include "CLS1.h"
 #include "UTIL1.h"
 #include "CS1.h"
@@ -49,10 +46,6 @@
 #include "CDC1.h"
 #include "Tx1.h"
 #include "Rx1.h"
-#include "DA1.h"
-#include "DacLdd1.h"
-#include "AD1.h"
-#include "AdcLdd1.h"
 #include "TMOUT1.h"
 #include "USB1.h"
 #include "USB0.h"
@@ -79,12 +72,59 @@ int main(void)
   CLS1_SendStr("Hello, Freedom!\r\n", CLS1_GetStdio()->stdOut);
   run_fft();
   CLS1_SendStr("FFTed.\r\n", CLS1_GetStdio()->stdOut);
-  CLS1_SendStr("fft = {\r\n", CLS1_GetStdio()->stdOut);
+#if 0
+  CLS1_SendStr("fftDC = {\r\n", CLS1_GetStdio()->stdOut);
   for(size_t i = 0; i < 64; i++) {
 	  CLS1_SendStr(" { ", CLS1_GetStdio()->stdOut);
 	  CLS1_SendNum32s(dinDC[2*i], CLS1_GetStdio()->stdOut);
 	  CLS1_SendStr(", ", CLS1_GetStdio()->stdOut);
 	  CLS1_SendNum32s(dinDC[2*i+1], CLS1_GetStdio()->stdOut);
+	  CLS1_SendStr(" },\r\n", CLS1_GetStdio()->stdOut);
+  }
+  CLS1_SendStr("};\r\n", CLS1_GetStdio()->stdOut);
+  CLS1_SendStr("fft1Hz = {\r\n", CLS1_GetStdio()->stdOut);
+  for(size_t i = 0; i < 64; i++) {
+	  CLS1_SendStr(" { ", CLS1_GetStdio()->stdOut);
+	  CLS1_SendNum32s(din1Hz[2*i], CLS1_GetStdio()->stdOut);
+	  CLS1_SendStr(", ", CLS1_GetStdio()->stdOut);
+	  CLS1_SendNum32s(din1Hz[2*i+1], CLS1_GetStdio()->stdOut);
+	  CLS1_SendStr(" },\r\n", CLS1_GetStdio()->stdOut);
+  }
+  CLS1_SendStr("};\r\n", CLS1_GetStdio()->stdOut);
+  CLS1_SendStr("fft1HzShort = {\r\n", CLS1_GetStdio()->stdOut);
+  for(size_t i = 0; i < 4; i++) {
+	  CLS1_SendStr(" { ", CLS1_GetStdio()->stdOut);
+	  CLS1_SendNum32s(din1HzShort[2*i], CLS1_GetStdio()->stdOut);
+	  CLS1_SendStr(", ", CLS1_GetStdio()->stdOut);
+	  CLS1_SendNum32s(din1HzShort[2*i+1], CLS1_GetStdio()->stdOut);
+	  CLS1_SendStr(" },\r\n", CLS1_GetStdio()->stdOut);
+  }
+  CLS1_SendStr("};\r\n", CLS1_GetStdio()->stdOut);
+  CLS1_SendStr("fftMulti = {\r\n", CLS1_GetStdio()->stdOut);
+  for(size_t i = 0; i < 64; i++) {
+	  CLS1_SendStr(" { ", CLS1_GetStdio()->stdOut);
+	  CLS1_SendNum32s(dinMulti[2*i], CLS1_GetStdio()->stdOut);
+	  CLS1_SendStr(", ", CLS1_GetStdio()->stdOut);
+	  CLS1_SendNum32s(dinMulti[2*i+1], CLS1_GetStdio()->stdOut);
+	  CLS1_SendStr(" },\r\n", CLS1_GetStdio()->stdOut);
+  }
+  CLS1_SendStr("};\r\n", CLS1_GetStdio()->stdOut);
+  CLS1_SendStr("fft50ms = {\r\n", CLS1_GetStdio()->stdOut);
+  for(size_t i = 0; i < 1024; i++) {
+	  CLS1_SendStr(" { ", CLS1_GetStdio()->stdOut);
+	  CLS1_SendNum32s(din50ms[2*i], CLS1_GetStdio()->stdOut);
+	  CLS1_SendStr(", ", CLS1_GetStdio()->stdOut);
+	  CLS1_SendNum32s(din50ms[2*i+1], CLS1_GetStdio()->stdOut);
+	  CLS1_SendStr(" },\r\n", CLS1_GetStdio()->stdOut);
+  }
+  CLS1_SendStr("};\r\n", CLS1_GetStdio()->stdOut);
+#endif
+  CLS1_SendStr("fft20ms = {\r\n", CLS1_GetStdio()->stdOut);
+  for(size_t i = 0; i < 1024; i++) {
+	  CLS1_SendStr(" { ", CLS1_GetStdio()->stdOut);
+	  CLS1_SendNum32s(din20ms[2*i], CLS1_GetStdio()->stdOut);
+	  CLS1_SendStr(", ", CLS1_GetStdio()->stdOut);
+	  CLS1_SendNum32s(din20ms[2*i+1], CLS1_GetStdio()->stdOut);
 	  CLS1_SendStr(" },\r\n", CLS1_GetStdio()->stdOut);
   }
   CLS1_SendStr("};\r\n", CLS1_GetStdio()->stdOut);

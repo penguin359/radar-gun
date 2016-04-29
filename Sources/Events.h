@@ -41,9 +41,6 @@
 #include "BitIoLdd3.h"
 #include "WAIT1.h"
 #include "KSDK1.h"
-#include "TI1.h"
-#include "TimerIntLdd1.h"
-#include "TU1.h"
 #include "CLS1.h"
 #include "UTIL1.h"
 #include "CS1.h"
@@ -52,10 +49,6 @@
 #include "CDC1.h"
 #include "Tx1.h"
 #include "Rx1.h"
-#include "DA1.h"
-#include "DacLdd1.h"
-#include "AD1.h"
-#include "AdcLdd1.h"
 #include "TMOUT1.h"
 #include "USB1.h"
 #include "USB0.h"
@@ -95,38 +88,6 @@ void Cpu_OnNMIINT(void);
 ** ===================================================================
 */
 void TI1_OnInterrupt(void);
-
-void AD1_OnEnd(void);
-/*
-** ===================================================================
-**     Event       :  AD1_OnEnd (module Events)
-**
-**     Component   :  AD1 [ADC]
-**     Description :
-**         This event is called after the measurement (which consists
-**         of <1 or more conversions>) is/are finished.
-**         The event is available only when the <Interrupt
-**         service/event> property is enabled.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
-
-void AD1_OnCalibrationEnd(void);
-/*
-** ===================================================================
-**     Event       :  AD1_OnCalibrationEnd (module Events)
-**
-**     Component   :  AD1 [ADC]
-**     Description :
-**         This event is called when the calibration has been finished.
-**         User should check if the calibration pass or fail by
-**         Calibration status method./nThis event is enabled only if
-**         the <Interrupt service/event> property is enabled.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
 
 /* END Events */
 

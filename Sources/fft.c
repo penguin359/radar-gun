@@ -9,6 +9,14 @@
 #include <arm_math.h>
 #include <arm_const_structs.h>
 
+/* Including needed modules to compile this module/procedure */
+#include "CLS1.h"
+/* Including shared modules, which are used for whole project */
+#include "PE_Types.h"
+#include "PE_Error.h"
+#include "PE_Const.h"
+#include "IO_Map.h"
+
 #include "test_data.h"
 
 
@@ -46,13 +54,31 @@ void calculate_fft(q31_t *data, uint16_t length)
 		case 4096:
 			S = &arm_cfft_sR_q31_len4096;
 			break;
+		default:
+			return;
 	}
 
-	arm_cfft_q31(S, data, 0, 0);
+	arm_cfft_q31(S, data, 0, 1);
 }
 
+#define fft_it(data)	(calculate_fft(data, (sizeof(data)/sizeof(data[0])/2)))
 void run_fft(void)
 {
-	size_t length = sizeof(dinDC)/sizeof(dinDC[0])/2;
-	calculate_fft(dinDC, length);
+	CLS1_SendStr(".\r\n", CLS1_GetStdio()->stdOut);
+	//fft_it(dinDC);
+	CLS1_SendStr(".\r\n", CLS1_GetStdio()->stdOut);
+	//fft_it(din1Hz);
+	CLS1_SendStr(".\r\n", CLS1_GetStdio()->stdOut);
+	//fft_it(din1HzShort);
+	CLS1_SendStr(".\r\n", CLS1_GetStdio()->stdOut);
+	//fft_it(dinMulti);
+	CLS1_SendStr(".\r\n", CLS1_GetStdio()->stdOut);
+	//fft_it(din50ms);
+	CLS1_SendStr(".\r\n", CLS1_GetStdio()->stdOut);
+	fft_it(din20ms);
+	//fft_it(din20msNoise);
+	//fft_it(din20msBigNoise);
+	//fft_it(din20msGiantNoise);
+	//fft_it(din20ms10m_up);
+	//fft_it(din20ms10m_down);
 }
