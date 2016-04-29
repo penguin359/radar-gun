@@ -57,6 +57,7 @@
 #include "DA1.h"
 #include "DacLdd1.h"
 #include "CLS2.h"
+#include "RNG1.h"
 #include "TMOUT1.h"
 #include "USB1.h"
 #include "USB0.h"

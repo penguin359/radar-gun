@@ -84,10 +84,7 @@ void TI1_OnInterrupt(void)
 	else
 		val = (uint16_t)((count)*4095UL/25UL);
 	DA1_SetValue(&val);
-	if(CDC1_ApplicationStarted()) {
-		//CLS2_SendNum16u(val, CLS2_GetStdio()->stdOut);
-		//CLS2_SendStr("\r\n", CLS2_GetStdio()->stdOut);
-	}
+	RNG1_Put(val);
 
 	/*
 	static bool green = false;

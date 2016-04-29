@@ -54,6 +54,7 @@
 #include "DA1.h"
 #include "DacLdd1.h"
 #include "CLS2.h"
+#include "RNG1.h"
 #include "TMOUT1.h"
 #include "USB1.h"
 #include "USB0.h"
@@ -145,8 +146,17 @@ int main(void)
 	CLS1_SendNum32s(speed, CLS1_GetStdio()->stdOut);
 	CLS1_SendStr("\r\n", CLS1_GetStdio()->stdOut);
 	for(;;) {
+		static uint8_t cdc_buffer[USB1_DATA_BUFF_SIZE];
 		extern uint32_t timeElapsed;
 		uint32_t startCount = 0;
+		uint16_t val;
+
+		CDC1_App_Task(cdc_buffer, sizeof(cdc_buffer));
+		if(RNG1_Get(&val) == ERR_OK && CDC1_ApplicationStarted()) {
+			CLS2_SendNum16u(val, CLS2_GetStdio()->stdOut);
+			CLS2_SendStr("\r\n", CLS2_GetStdio()->stdOut);
+		}
+#if 0
 		LedRed_NegVal();
 		CLS1_SendStr(".", CLS1_GetStdio()->stdOut);
 		WAIT1_Waitms(500);
@@ -156,6 +166,7 @@ int main(void)
 		CLS1_SendStr("T:", CLS1_GetStdio()->stdOut);
 		CLS1_SendNum32u(timeElapsed - startCount, CLS1_GetStdio()->stdOut);
 		CLS1_SendStr("\r\n", CLS1_GetStdio()->stdOut);
+#endif
 	}
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
