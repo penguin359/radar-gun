@@ -49,8 +49,11 @@
 #include "CDC1.h"
 #include "Tx1.h"
 #include "Rx1.h"
+#include "AD1.h"
+#include "AdcLdd1.h"
 #include "DA1.h"
 #include "DacLdd1.h"
+#include "CLS2.h"
 #include "TMOUT1.h"
 #include "USB1.h"
 #include "USB0.h"
@@ -133,20 +136,27 @@ int main(void)
 	  CLS1_SendStr(" },\r\n", CLS1_GetStdio()->stdOut);
   }
   CLS1_SendStr("};\r\n", CLS1_GetStdio()->stdOut);
-  int32_t freq = find_peak_frequency(din20ms, log2N20ms, 4);
-  int32_t speed = convertToSpeed(freq);
-  CLS1_SendStr("Frequency: ", CLS1_GetStdio()->stdOut);
-  CLS1_SendNum32s(freq, CLS1_GetStdio()->stdOut);
-  CLS1_SendStr("\r\n", CLS1_GetStdio()->stdOut);
-  CLS1_SendStr("Speed: ", CLS1_GetStdio()->stdOut);
-  CLS1_SendNum32s(speed, CLS1_GetStdio()->stdOut);
-  CLS1_SendStr("\r\n", CLS1_GetStdio()->stdOut);
-  for(;;) {
-	  LedRed_NegVal();
-	  CLS1_SendStr(".", CLS1_GetStdio()->stdOut);
-	  WAIT1_Waitms(500);
-	  CDC1_SendString("Hello, USB!\r\n");
-  }
+	int32_t freq = find_peak_frequency(din20ms, log2N20ms, 4);
+	int32_t speed = convertToSpeed(freq);
+	CLS1_SendStr("Frequency: ", CLS1_GetStdio()->stdOut);
+	CLS1_SendNum32s(freq, CLS1_GetStdio()->stdOut);
+	CLS1_SendStr("\r\n", CLS1_GetStdio()->stdOut);
+	CLS1_SendStr("Speed: ", CLS1_GetStdio()->stdOut);
+	CLS1_SendNum32s(speed, CLS1_GetStdio()->stdOut);
+	CLS1_SendStr("\r\n", CLS1_GetStdio()->stdOut);
+	for(;;) {
+		extern uint32_t timeElapsed;
+		uint32_t startCount = 0;
+		LedRed_NegVal();
+		CLS1_SendStr(".", CLS1_GetStdio()->stdOut);
+		WAIT1_Waitms(500);
+		//CDC1_SendString("Hello, USB!\r\n");
+		startCount = timeElapsed;
+		calculate_fft(din20ms, 1024);
+		CLS1_SendStr("T:", CLS1_GetStdio()->stdOut);
+		CLS1_SendNum32u(timeElapsed - startCount, CLS1_GetStdio()->stdOut);
+		CLS1_SendStr("\r\n", CLS1_GetStdio()->stdOut);
+	}
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/

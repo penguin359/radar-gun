@@ -21,6 +21,7 @@ extern q15_t din50ms[];
 extern q15_t din20ms[];
 extern const int log2N20ms;
 
+void calculate_fft(q15_t *data, uint16_t length);
 void run_fft(void);
 
 int32_t find_peak_frequency(const q15_t *din, int log2N, int fs);

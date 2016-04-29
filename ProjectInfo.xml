@@ -50,13 +50,16 @@
   </PATHS>
   <FILES>
     <GeneratedCs>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\AD1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\AS1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\ASerialLdd1.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\AdcLdd1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd2.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd3.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CDC1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CLS1.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CLS2.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CS1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Cpu.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\DA1.c</PathName>
@@ -92,13 +95,16 @@
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\main.c</PathName>
     </GeneratedCs>
     <GeneratedHs>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\AD1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\AS1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\ASerialLdd1.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\AdcLdd1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd2.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd3.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CDC1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CLS1.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CLS2.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CS1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Cpu.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\DA1.h</PathName>

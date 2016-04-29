@@ -69,29 +69,73 @@ void Cpu_OnNMIINT(void)
 ** ===================================================================
 */
 uint32_t count = 0;
+uint32_t timeElapsed = 0;
 
 void TI1_OnInterrupt(void)
 {
 	uint16_t val;
 
-  count++;
-  if(count >= 50)
-	  count = 0;
-  if(count > 25)
-	  val = (uint16_t)((50 - count)*4095UL/25UL);
-  else
-	  val = (uint16_t)((count)*4095UL/25UL);
-  //DA1_SetValue(&val);
+	timeElapsed++;
+	count++;
+	if(count >= 50)
+		count = 0;
+	if(count > 25)
+		val = (uint16_t)((50 - count)*4095UL/25UL);
+	else
+		val = (uint16_t)((count)*4095UL/25UL);
+	DA1_SetValue(&val);
+	if(CDC1_ApplicationStarted()) {
+		//CLS2_SendNum16u(val, CLS2_GetStdio()->stdOut);
+		//CLS2_SendStr("\r\n", CLS2_GetStdio()->stdOut);
+	}
 
-  /*
-  static bool green = false;
-  if(green) {
-	  LedGreen_NegVal();
-  } else {
-	  LedBlue_NegVal();
-  }
-  green = !green;
-  */
+	/*
+	static bool green = false;
+	if(green) {
+		LedGreen_NegVal();
+	} else {
+		LedBlue_NegVal();
+	}
+	green = !green;
+	*/
+}
+
+/*
+** ===================================================================
+**     Event       :  AD1_OnEnd (module Events)
+**
+**     Component   :  AD1 [ADC]
+**     Description :
+**         This event is called after the measurement (which consists
+**         of <1 or more conversions>) is/are finished.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void AD1_OnEnd(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  AD1_OnCalibrationEnd (module Events)
+**
+**     Component   :  AD1 [ADC]
+**     Description :
+**         This event is called when the calibration has been finished.
+**         User should check if the calibration pass or fail by
+**         Calibration status method./nThis event is enabled only if
+**         the <Interrupt service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void AD1_OnCalibrationEnd(void)
+{
+  /* Write your code here ... */
 }
 
 /* END Events */
