@@ -59,13 +59,18 @@
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CLS1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CS1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Cpu.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\DA1.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\DacLdd1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\KSDK1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\LedBlue.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\LedGreen.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\LedRed.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\PE_LDD.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Rx1.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\TI1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\TMOUT1.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\TU1.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\TimerIntLdd1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Tx1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\USB0.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\USB1.c</PathName>
@@ -83,6 +88,7 @@
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Project_Settings\Startup_Code\startup.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\Events.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\fft.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\fft2.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\main.c</PathName>
     </GeneratedCs>
     <GeneratedHs>
@@ -95,6 +101,8 @@
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CLS1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CS1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Cpu.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\DA1.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\DacLdd1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\FSL_USB_Stack_Config.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\IO_Map.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\KSDK1.h</PathName>
@@ -106,7 +114,10 @@
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\PE_LDD.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\PE_Types.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Rx1.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\TI1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\TMOUT1.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\TU1.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\TimerIntLdd1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Tx1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\USB0.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\USB1.h</PathName>
@@ -129,6 +140,7 @@
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\wdt_kinetis.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\Events.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\fft.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\fft2.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\test_data.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Static_Code\IO_Map\MKL25Z4.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Static_Code\PDD\ADC_PDD.h</PathName>
