@@ -2,3 +2,6 @@
 *.swp
 *~
 /Debug/
+/Generated_code/
+/Documentation/
+/.blinky.g_*
