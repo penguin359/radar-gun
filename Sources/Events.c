@@ -84,7 +84,8 @@ void TI1_OnInterrupt(void)
 	else
 		val = (uint16_t)((count)*4095UL/25UL);
 	DA1_SetValue(&val);
-	RNG1_Put(val);
+	//RNG1_Put(val);
+	AD1_Measure(false);
 
 	/*
 	static bool green = false;
@@ -113,7 +114,9 @@ void TI1_OnInterrupt(void)
 */
 void AD1_OnEnd(void)
 {
-  /* Write your code here ... */
+	uint16_t val;
+	AD1_GetValue16(&val);
+	RNG1_Put(val);
 }
 
 /*
