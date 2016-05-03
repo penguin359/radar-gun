@@ -1,0 +1,150 @@
+#!/usr/bin/env node
+
+var Notification = require('node-notifier');
+var watch = require('watch');
+var child_process = require('child_process');
+var path = require('path');
+
+var messages = {
+  success : {
+    displayName : 'Success',
+    title       : 'PASSED - %s',
+    message     : '%d tests passed in %s.',
+    icon        : path.join(__dirname, 'images/success.png')
+  },
+  failed : {
+    displayName : 'Failure',
+    title       : 'FAILED - %s',
+    message     : '%d/%d tests failed in %s.',
+    icon        : path.join(__dirname, 'images/failed.png')
+  },
+  error : {
+    displayName : 'Aborted',
+    title       : 'ERROR - %s',
+    message     : '',
+    icon        : path.join(__dirname, 'images/error.png')
+  },
+};
+
+var notifier = new Notification();
+
+var includeFiles = /^(src|test\/tests)\/.*\.(c|h)$/i;
+var excludePaths = [
+];
+
+var macNotify = 'growlnotify',
+    linuxNotify = 'notify-send',
+    useMac = false,
+    useLinux = false;
+
+var results = child_process.spawnSync(macNotify, ['--version']);
+if(results.status === 0) {
+    useMac = true;
+} else {
+    results = child_process.spawnSync(linuxNotify, ['--version']);
+    if(results.status === 0) {
+	useLinux = true;
+    }
+}
+
+watch.watchTree('.', {
+	ignoreDotFiles: true,
+	filter: function(file, stat) {
+		if(stat.isDirectory()) {
+			for(var i = 0; i < excludePaths.length; i++) {
+				if(excludePaths[i] == file) {
+					//console.log('Excluding path ' + file);
+					return false;
+				}
+			}
+			return true;
+		} else if(stat.isFile()) {
+			if(includeFiles.test(file)) {
+				//console.log('Filter: ' + file);
+				return true;
+			}
+		}
+		return false;
+	},
+	ignoreUnreadableDir: true,
+	ignoreNotPermitted: true,
+}, function(file, current, previous) {
+	if(typeof file == 'object' && previous == null && current == null) {
+		/* Finished walking tree */
+		//console.log(file);
+	} else if(previous == null) {
+		/* New file found */
+		console.log('New file: ' + file);
+	} else if(current.nlink === 0) {
+		/* File deleted */
+		console.log('Deleted File: ' + file);
+	} else {
+		/* File changed */
+	}
+
+	runTest();
+});
+
+function notify(message) {
+    message = message.split("\n");
+
+    function find_all(lines, pattern) {
+	var output = [];
+
+	for(var i = 0; i < lines.length; i++) {
+	    if(pattern.test(lines[i]))
+		output.push(lines[i]);
+	}
+
+	return output.join('\n');
+    }
+
+    var title = "ERROR",
+	image = path.join(process.cwd(), 'scripts', 'error.png'),
+	info = find_all(message, /Error/),
+        msg = messages.error;
+    if(find_all(message, /FAILED/)) {
+	title = "FAILED";
+	image = path.join(process.cwd(), 'scripts', 'failed.png'),
+	info = find_all(message, /: test/);
+        msg = messages.failed;
+    } else if(find_all(message, /^OK/)) {
+	title = "PASSED";
+	image = path.join(process.cwd(), 'scripts', 'success.png');
+	info = find_all(message, /Ran/);
+        msg = messages.success;
+    }
+    msg.title = title;
+    msg.message = info;
+    msg.icon = image;
+    notifier.notify(msg);
+}
+
+var testInProgress = false;
+
+function runTest() {
+	if(testInProgress)
+		return;
+	testInProgress = true;
+	console.log('Running test');
+	var args = ['unit'].concat(process.argv.slice(2));
+	//var child = child_process.spawn('python', args,
+	//		{stdio: 'inherit'});
+	var child = child_process.spawn('rake', args,
+			{stdio: ['ignore', process.stdout, 'pipe'], cwd: 'test'});
+	var message = '';
+	//child.stdout.on('data', function(data) {
+	//	console.log('stdout: "' + data + '"');
+	//});
+	child.stderr.on('data', function(data) {
+		data = data + '';
+		message = message + data;
+		//console.log('stderr: "' + data + '"');
+		//console.log(data);
+		process.stderr.write(data);
+	});
+	child.on('close', function(code) {
+		notify(message);
+		testInProgress = false;
+	});
+}

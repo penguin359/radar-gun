@@ -1,0 +1,17 @@
+{
+  "name": "FFT",
+  "private": true,
+  "version": "0.0.0",
+  "description": "FFT testing fun!",
+  "license": "Proprietary",
+  "devDependencies": {
+    "node-notifier": "^3.0.6",
+    "shelljs": "^0.2.6",
+    "watch": "^0.16.0"
+  },
+  "scripts": {
+    "pretest": "npm install",
+    "test": "node scripts/watchr",
+    "test-single-run": "cd test && rake unit"
+  }
+}

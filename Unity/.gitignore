@@ -6,3 +6,5 @@ examples/example_2/all_tests.out
 examples/example_3/test1.out
 examples/example_3/test2.out
 *.swp
+/node_modules/
+/npm-debug.log
