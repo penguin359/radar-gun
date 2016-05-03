@@ -35,6 +35,8 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include <stdint.h>
+#include <arm_math.h>
 
 /*
 ** ===================================================================
@@ -86,6 +88,8 @@ void TI1_OnInterrupt(void)
 	DA1_SetValue(&val);
 	//RNG1_Put(val);
 	AD1_Measure(false);
+	Bit1_SetVal();
+	Bit2_NegVal();
 
 	/*
 	static bool green = false;
@@ -112,11 +116,27 @@ void TI1_OnInterrupt(void)
 **     Returns     : Nothing
 ** ===================================================================
 */
+#define DIN_LEN 1024
+const int dinLen = DIN_LEN;
+q15_t dinCapture[DIN_LEN*2];
+int dinIdx = 0;
+bool dinCaptureCompleted = false;
+
 void AD1_OnEnd(void)
 {
 	uint16_t val;
 	AD1_GetValue16(&val);
-	RNG1_Put(val);
+	Bit1_ClrVal();
+	//RNG1_Put(val);
+	if(dinCaptureCompleted == true)
+		return;
+	dinCapture[dinIdx*2] = (q15_t)(val - 32768U);
+	dinCapture[dinIdx*2+1] = 0;
+	dinIdx++;
+	if(dinIdx >= dinLen) {
+		dinIdx = 0;
+		dinCaptureCompleted = true;
+	}
 }
 
 /*

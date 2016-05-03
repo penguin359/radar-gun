@@ -55,6 +55,10 @@
 #include "DacLdd1.h"
 #include "CLS2.h"
 #include "RNG1.h"
+#include "Bit1.h"
+#include "BitIoLdd4.h"
+#include "Bit2.h"
+#include "BitIoLdd5.h"
 #include "TMOUT1.h"
 #include "USB1.h"
 #include "USB0.h"
@@ -64,6 +68,8 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include <stdint.h>
+#include <arm_math.h>
 #include "fft.h"
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
@@ -150,11 +156,36 @@ int main(void)
 		extern uint32_t timeElapsed;
 		uint32_t startCount = 0;
 		uint16_t val;
+		extern const int dinLen;
+		extern q15_t dinCapture[];
+		extern bool dinCaptureCompleted;
 
 		CDC1_App_Task(cdc_buffer, sizeof(cdc_buffer));
 		if(RNG1_Get(&val) == ERR_OK && CDC1_ApplicationStarted()) {
 			CLS2_SendNum16u(val, CLS2_GetStdio()->stdOut);
 			CLS2_SendStr("\r\n", CLS2_GetStdio()->stdOut);
+		}
+		if(dinCaptureCompleted) {
+			CLS1_SendStr("Signal:", CLS1_GetStdio()->stdOut);
+			for(int j = 0; j < 1024; j++) {
+				CLS1_SendNum16s(dinCapture[j*2], CLS1_GetStdio()->stdOut);
+				CLS1_SendStr(",", CLS1_GetStdio()->stdOut);
+				CLS1_SendNum16s(dinCapture[j*2+1], CLS1_GetStdio()->stdOut);
+				CLS1_SendStr("\r\n", CLS1_GetStdio()->stdOut);
+			}
+			calculate_fft(dinCapture, dinLen);
+			CLS1_SendStr("FFT:", CLS1_GetStdio()->stdOut);
+			for(int j = 0; j < 1024; j++) {
+				CLS1_SendNum16s(dinCapture[j*2], CLS1_GetStdio()->stdOut);
+				CLS1_SendStr(",", CLS1_GetStdio()->stdOut);
+				CLS1_SendNum16s(dinCapture[j*2+1], CLS1_GetStdio()->stdOut);
+				CLS1_SendStr("\r\n", CLS1_GetStdio()->stdOut);
+			}
+			int32_t freq = find_peak_frequency(dinCapture, 10, 1000);
+			CLS1_SendStr("F: ", CLS1_GetStdio()->stdOut);
+			CLS1_SendNum32s(freq, CLS1_GetStdio()->stdOut);
+			CLS1_SendStr("\r\n", CLS1_GetStdio()->stdOut);
+			dinCaptureCompleted = false;
 		}
 #if 0
 		LedRed_NegVal();

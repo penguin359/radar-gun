@@ -54,9 +54,13 @@
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\AS1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\ASerialLdd1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\AdcLdd1.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Bit1.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Bit2.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd2.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd3.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd4.c</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd5.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CDC1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CLS1.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CLS2.c</PathName>
@@ -92,7 +96,6 @@
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Project_Settings\Startup_Code\startup.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\Events.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\fft.c</PathName>
-      <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\fft2.c</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\main.c</PathName>
     </GeneratedCs>
     <GeneratedHs>
@@ -100,9 +103,13 @@
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\AS1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\ASerialLdd1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\AdcLdd1.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Bit1.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\Bit2.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd2.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd3.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd4.h</PathName>
+      <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\BitIoLdd5.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CDC1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CLS1.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\CLS2.h</PathName>
@@ -148,7 +155,6 @@
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Generated_Code\wdt_kinetis.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\Events.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\fft.h</PathName>
-      <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\fft2.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Sources\test_data.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Static_Code\IO_Map\MKL25Z4.h</PathName>
       <PathName>C:\Users\lorenl\workspace.kds\blinky\Static_Code\PDD\ADC_PDD.h</PathName>
