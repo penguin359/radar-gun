@@ -1,0 +1,2 @@
+Add noise and multiple signals
+convert to speed

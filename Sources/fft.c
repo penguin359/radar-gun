@@ -91,12 +91,12 @@ int32_t find_peak_frequency(const q15_t *din, int log2N, int fs)
 	int16_t max_bin = 0;
 
 	for(i = 0; i < len/2; i++) {
-		int32_t value = din[i<<1]*-1;
+		int32_t value = din[i*2]*-1;
 		if(value > max_value) {
 			max_value = value;
 			max_bin = i;
 		}
-		value = din[i<<1+1]*-1;
+		value = din[i*2+1]*-1;
 		if(value > max_value) {
 			max_value = value;
 			max_bin = i;

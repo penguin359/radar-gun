@@ -4,6 +4,7 @@
 #include "unity.h"
 #include "fft.h"
 #include "test_data.h"
+#include "capture_data.h"
 
 
 #define BUFFER_GUARD	64
@@ -568,6 +569,66 @@ void testFromCaptureToSpeed20msGiantNoise(void)
 	TEST_ASSERT_EQUAL_INT32(748, freq);
 	speed = convertToSpeed(freq);
 	TEST_ASSERT_EQUAL_INT32(20, speed);
+}
+
+void testFindPeakFrequencyFromCaptured20Hz2(void)
+{
+	int32_t freq;
+
+	loadBuffer(dinPtr, dinCaptured20Hz2);
+	mips_fft32(doutPtr, dinPtr, fftcPtr, scratchPtr, log2NCaptured20Hz);
+	freq = find_peak_frequency(doutPtr, log2NCaptured20Hz, 1);
+	TEST_ASSERT_EQUAL_INT32(21, freq);
+}
+
+void testFindPeakFrequencyFromCaptured20Hz3(void)
+{
+	int32_t freq;
+
+	loadBuffer(dinPtr, dinCaptured20Hz3);
+	mips_fft32(doutPtr, dinPtr, fftcPtr, scratchPtr, log2NCaptured20Hz);
+	freq = find_peak_frequency(doutPtr, log2NCaptured20Hz, 1);
+	TEST_ASSERT_EQUAL_INT32(21, freq);
+}
+
+void testFindPeakFrequencyFromCaptured20Hz4(void)
+{
+	int32_t freq;
+
+	loadBuffer(dinPtr, dinCaptured20Hz4);
+	mips_fft32(doutPtr, dinPtr, fftcPtr, scratchPtr, log2NCaptured20Hz);
+	freq = find_peak_frequency(doutPtr, log2NCaptured20Hz, 1);
+	TEST_ASSERT_EQUAL_INT32(21, freq);
+}
+
+void testFindPeakFrequencyFromCaptured20Hz5(void)
+{
+	int32_t freq;
+
+	loadBuffer(dinPtr, dinCaptured20Hz5);
+	mips_fft32(doutPtr, dinPtr, fftcPtr, scratchPtr, log2NCaptured20Hz);
+	freq = find_peak_frequency(doutPtr, log2NCaptured20Hz, 1);
+	TEST_ASSERT_EQUAL_INT32(21, freq);
+}
+
+void testFindPeakFrequencyFromCaptured20Hz6(void)
+{
+	int32_t freq;
+
+	loadBuffer(dinPtr, dinCaptured20Hz6);
+	mips_fft32(doutPtr, dinPtr, fftcPtr, scratchPtr, log2NCaptured20Hz);
+	freq = find_peak_frequency(doutPtr, log2NCaptured20Hz, 1);
+	TEST_ASSERT_EQUAL_INT32(21, freq);
+}
+
+void testFindPeakFrequencyFromCaptured20Hz8(void)
+{
+	int32_t freq;
+
+	loadBuffer(dinPtr, dinCaptured20Hz8);
+	mips_fft32(doutPtr, dinPtr, fftcPtr, scratchPtr, log2NCaptured20Hz);
+	freq = find_peak_frequency(doutPtr, log2NCaptured20Hz, 1);
+	TEST_ASSERT_EQUAL_INT32(20, freq);
 }
 
 /* Test convert to/from Q31/float */
