@@ -1,8 +1,8 @@
 function fft_data
     clc; clear all; close all;
 
-    fs_hires = 2048;
-    %fs_hires = 1024;
+    %fs_hires = 2048;
+    fs_hires = 1024;
 
     % Q31 format
     m = 0;

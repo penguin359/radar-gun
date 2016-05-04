@@ -1,5 +1,5 @@
 function processSignal(t, signal, fs, name, file)
-    signal_int = convertToQ31(signal);
+    signal_int = convertToQ15(signal);
 
     figure;
     plot(t, signal_int);
@@ -18,7 +18,7 @@ function processSignal(t, signal, fs, name, file)
     %plot(real(z2), imag(z2));
 
     print_to_file(file, sprintf('static const int32c fft%s[] = {', name));
-    print_data(file, convertToQ31(z));
+    print_data(file, convertToQ15(z));
 
     print_to_file(file, ...
 	sprintf('static const int log2N%s = %d;\n', name, log(fs)/log(2)));
