@@ -414,7 +414,15 @@ void testFindPeakFrequency20ms10m_up(void)
 	int32_t freq;
 
 	freq = find_peak_frequency(fft20ms10m_up, log2N20ms10m_up, 4);
-	TEST_ASSERT_EQUAL_INT32(853, freq);
+	TEST_ASSERT_EQUAL_INT32(852, freq);
+}
+
+void testFindPeakFrequency20ms10m_down(void)
+{
+	int32_t freq;
+
+	freq = find_peak_frequency(fft20ms10m_down, log2N20ms10m_down, 4);
+	TEST_ASSERT_EQUAL_INT32(640, freq);
 }
 
 void testConvertToSpeedDC(void)
