@@ -110,14 +110,14 @@ function fft_data
     fs = 2048;		% Buffer size for FFT
     fs_per_bin = 4;	% Real sampling frequency is 8192
     t = [0:fs-1]./fs/fs_per_bin;
-    fup = 853;		% 746 Hz is about 20 m/s
+    f = 853;		% 746 Hz is about 20 m/s
     signal = sin(2*pi*f*t);
     %signal = add_noise(signal, 6.8);
     signal = signal / max(abs(signal)); % scale to +/- 1
     name = '20ms10m_up';
     disp('20 m/s 10 m up signal:');
     processSignal(t, signal, fs, name, file);
-    fdown = 640;	% 746 Hz is about 20 m/s
+    f = 640;	% 746 Hz is about 20 m/s
     signal = sin(2*pi*f*t);
     %signal = add_noise(signal, 6.8);
     signal = signal / max(abs(signal)); % scale to +/- 1

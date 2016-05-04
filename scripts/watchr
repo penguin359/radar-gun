@@ -86,7 +86,7 @@ watch.watchTree('.', {
 });
 
 function notify(message) {
-    message = message.split("\n");
+    message = message.replace(/\x1b[^m]*m/g, '').split("\n");
 
     function find_all(lines, pattern) {
 	var output = [];
@@ -99,19 +99,26 @@ function notify(message) {
 	return output.join('\n');
     }
 
+    function check_output(lines, pattern) {
+	for(var i = 0; i < lines.length; i++)
+	    if(pattern.test(lines[i]))
+		return true;
+	return false;
+    }
+
     var title = "ERROR",
 	image = path.join(process.cwd(), 'scripts', 'error.png'),
 	info = find_all(message, /Error/),
         msg = messages.error;
-    if(find_all(message, /FAILED/)) {
+    if(check_output(message, /^FAIL/)) {
 	title = "FAILED";
 	image = path.join(process.cwd(), 'scripts', 'failed.png'),
-	info = find_all(message, /: test/);
+	info = find_all(message, /FAIL/).replace(/(^|\n)[^:]*:\d+:/g, ' ');
         msg = messages.failed;
-    } else if(find_all(message, /^OK/)) {
+    } else if(check_output(message, /^OK/)) {
 	title = "PASSED";
 	image = path.join(process.cwd(), 'scripts', 'success.png');
-	info = find_all(message, /Ran/);
+	info = find_all(message, / Tests /);
         msg = messages.success;
     }
     msg.title = title;
@@ -131,12 +138,12 @@ function runTest() {
 	//var child = child_process.spawn('python', args,
 	//		{stdio: 'inherit'});
 	var child = child_process.spawn('rake', args,
-			{stdio: ['ignore', process.stdout, 'pipe'], cwd: 'test'});
+			{stdio: ['ignore', 'pipe', process.stderr], cwd: 'test'});
 	var message = '';
 	//child.stdout.on('data', function(data) {
 	//	console.log('stdout: "' + data + '"');
 	//});
-	child.stderr.on('data', function(data) {
+	child.stdout.on('data', function(data) {
 		data = data + '';
 		message = message + data;
 		//console.log('stderr: "' + data + '"');
