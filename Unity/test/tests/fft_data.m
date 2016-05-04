@@ -1,6 +1,9 @@
 function fft_data
     clc; clear all; close all;
 
+    fs_hires = 2048;
+    %fs_hires = 1024;
+
     % Q31 format
     m = 0;
     n = 31;
@@ -49,7 +52,7 @@ function fft_data
     processSignal(t, signal, fs, name, file);
 
     % Generate a signal representing 50 m/s
-    fs = 2048;		% Buffer size for FFT
+    fs = fs_hires;	% Buffer size for FFT
     fs_per_bin = 4;	% Real sampling frequency is 8192
     t = [0:fs-1]./fs/fs_per_bin;
     f = 1.868e3;	% 1.868 kHz is about 50 m/s
@@ -60,7 +63,7 @@ function fft_data
     processSignal(t, signal, fs, name, file);
 
     % Generate a signal representing 20 m/s
-    fs = 2048;		% Buffer size for FFT
+    fs = fs_hires;	% Buffer size for FFT
     fs_per_bin = 4;	% Real sampling frequency is 8192
     t = [0:fs-1]./fs/fs_per_bin;
     f = 746;		% 746 Hz is about 20 m/s
@@ -71,7 +74,7 @@ function fft_data
     processSignal(t, signal, fs, name, file);
 
     % Generate a noisy signal representing 20 m/s
-    fs = 2048;		% Buffer size for FFT
+    fs = fs_hires;	% Buffer size for FFT
     fs_per_bin = 4;	% Real sampling frequency is 8192
     t = [0:fs-1]./fs/fs_per_bin;
     f = 746;		% 746 Hz is about 20 m/s
@@ -83,7 +86,7 @@ function fft_data
     processSignal(t, signal, fs, name, file);
 
     % Generate a very noisy signal representing 20 m/s
-    fs = 2048;		% Buffer size for FFT
+    fs = fs_hires;	% Buffer size for FFT
     fs_per_bin = 4;	% Real sampling frequency is 8192
     t = [0:fs-1]./fs/fs_per_bin;
     f = 746;		% 746 Hz is about 20 m/s
@@ -95,7 +98,7 @@ function fft_data
     processSignal(t, signal, fs, name, file);
 
     % Generate a very very noisy signal representing 20 m/s
-    fs = 2048;		% Buffer size for FFT
+    fs = fs_hires;	% Buffer size for FFT
     fs_per_bin = 4;	% Real sampling frequency is 8192
     t = [0:fs-1]./fs/fs_per_bin;
     f = 746;		% 746 Hz is about 20 m/s
@@ -107,7 +110,7 @@ function fft_data
     processSignal(t, signal, fs, name, file);
 
     % Generate a representing 20 m/s velocity and 10 m distance
-    fs = 2048;		% Buffer size for FFT
+    fs = fs_hires;	% Buffer size for FFT
     fs_per_bin = 4;	% Real sampling frequency is 8192
     t = [0:fs-1]./fs/fs_per_bin;
     f = 853;		% 746 Hz is about 20 m/s
