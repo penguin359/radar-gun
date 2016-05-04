@@ -8,24 +8,20 @@
 
 
 
-doublec convertFromQ31(int32c value)
+doublec convertFromQ15(q15_t *value)
 {
 	doublec retval;
 
-	retval.re = (double)value.re / 2147483648.;
-	retval.im = (double)value.im / 2147483648.;
+	retval.re = (double)value[0] / 32768.;
+	retval.im = (double)value[1] / 32768.;
 
 	return retval;
 }
 
-int32c convertToQ31(doublec value)
+void convertToQ15(doublec value, q15_t *retval)
 {
-	int32c retval;
-
-	retval.re = (int32_t)(value.re * 2147483648. + .0);
-	retval.im = (int32_t)(value.im * 2147483648. + .0);
-
-	return retval;
+	retval[0] = (q15_t)(value.re * 32768. + .0);
+	retval[1] = (q15_t)(value.im * 32768. + .0);
 }
 
 
@@ -59,7 +55,7 @@ doublec complexExp(double val)
 	return retval;
 }
 
-void mips_fft32(int32c *dout, int32c *din, int32c *twiddles, int32c *scratch, int log2N)
+void mips_fft32(q15_t *dout, q15_t *din, q15_t *twiddles, q15_t *scratch, int log2N)
 {
 	int samples = 1 << log2N;
 	int n;
@@ -69,13 +65,13 @@ void mips_fft32(int32c *dout, int32c *din, int32c *twiddles, int32c *scratch, in
 	doublec e, p;
 	doublec sum;
 
-	(void)twiddles[0].re; /* Stop unused warnings */
-	(void)scratch[0].re;
+	(void)twiddles[0]; /* Stop unused warnings */
+	(void)scratch[0];
 	//output[n] = 1/(2^log2(N))*sum(din[k]*exp(-j*2*pi*k*n/N),k=0,N-1)
 	for(n = 0; n < samples; n++) {
 		sum.re = 0.; sum.im = 0.;
 		for(k = 0; k < samples; k++) {
-			dinReal = convertFromQ31(din[k]);
+			dinReal = convertFromQ15(&din[k*2]);
 			theta = -2. * M_PI * (double)k * (double)n / (double)samples;
 			e = complexExp(theta);
 			p = complexMultiply(dinReal, e);
@@ -86,11 +82,11 @@ void mips_fft32(int32c *dout, int32c *din, int32c *twiddles, int32c *scratch, in
 		}
 		doutReal.re = sum.re / (double)samples;
 		doutReal.im = sum.im / (double)samples;
-		dout[n] = convertToQ31(doutReal);
+		convertToQ15(doutReal, &dout[n*2]);
 	}
 }
 
-int32_t find_peak_frequency(const int32c *din, int log2N, int fs)
+int32_t find_peak_frequency(const q15_t *din, int log2N, int fs)
 {
 	int16_t len = 1 << log2N;
 	int16_t i;
@@ -98,12 +94,12 @@ int32_t find_peak_frequency(const int32c *din, int log2N, int fs)
 	int16_t max_bin = 0;
 
 	for(i = 0; i < len; i++) {
-		int32_t value = din[i].re*-1;
+		int32_t value = din[i*2]*-1;
 		if(value > max_value) {
 			max_value = value;
 			max_bin = i;
 		}
-		value = din[i].im*-1;
+		value = din[i*2+1]*-1;
 		if(value > max_value) {
 			max_value = value;
 			max_bin = i;
@@ -121,10 +117,10 @@ int32_t convertToSpeed(int32_t freq)
 #define LOG_2N	6
 #define N	64	/* 2^LOG_2N */
 
-int32c din[N];
-int32c dout[N];
-int32c fft[N];
-int32c scratch[N];
+q15_t din[N<<1];
+q15_t dout[N<<1];
+q15_t fft[N<<1];
+q15_t scratch[N<<1];
 
 const char *filein = "signal.bin";
 const char *fileout = "fft.bin";

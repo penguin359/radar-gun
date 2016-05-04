@@ -4,7 +4,7 @@ function processSignal(t, signal, fs, name, file)
     figure;
     plot(t, signal_int);
 
-    print_to_file(file, sprintf('static const int32c din%s[] = {', name));
+    print_to_file(file, sprintf('static const q15_t din%s[] = {', name));
     print_data(file, signal_int);
 
     N = fs;
@@ -17,7 +17,7 @@ function processSignal(t, signal, fs, name, file)
     plot(freq2, abs(z2));
     %plot(real(z2), imag(z2));
 
-    print_to_file(file, sprintf('static const int32c fft%s[] = {', name));
+    print_to_file(file, sprintf('static const q15_t fft%s[] = {', name));
     print_data(file, convertToQ15(z));
 
     print_to_file(file, ...

@@ -4,11 +4,14 @@
 
 #include <stdint.h>
 
+/*
 typedef struct
 {
 	int32_t re;
 	int32_t im;
 } int32c;
+*/
+typedef int16_t q15_t;
 
 typedef struct
 {
@@ -16,15 +19,15 @@ typedef struct
 	double im;
 } doublec;
 
-doublec convertFromQ31(int32c value);
-int32c convertToQ31(doublec value);
+doublec convertFromQ15(q15_t *value);
+void convertToQ15(doublec value, q15_t *retval);
 
 doublec complexAdd(doublec a, doublec b);
 doublec complexMultiply(doublec a, doublec b);
 doublec complexExp(double val);
 
-void mips_fft32(int32c *dout, int32c *din, int32c *twiddles, int32c *scratch, int log2N);
-int32_t find_peak_frequency(const int32c *din, int log2N, int fs);
+void mips_fft32(q15_t *dout, q15_t *din, q15_t *twiddles, q15_t *scratch, int log2N);
+int32_t find_peak_frequency(const q15_t *din, int log2N, int fs);
 int32_t convertToSpeed(int32_t freq);
 
 

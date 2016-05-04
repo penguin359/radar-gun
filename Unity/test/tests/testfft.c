@@ -12,15 +12,15 @@
 
 #define UNUSED_BYTE	0x5a
 
-static int32c doutBuffer   [N_SAMPLES + 2*BUFFER_GUARD];
-static int32c dinBuffer    [N_SAMPLES + 2*BUFFER_GUARD];
-static int32c fftcBuffer   [N_SAMPLES + 2*BUFFER_GUARD];
-static int32c scratchBuffer[N_SAMPLES + 2*BUFFER_GUARD];
+static q15_t doutBuffer   [2*N_SAMPLES + 2*2*BUFFER_GUARD];
+static q15_t dinBuffer    [2*N_SAMPLES + 2*2*BUFFER_GUARD];
+static q15_t fftcBuffer   [2*N_SAMPLES + 2*2*BUFFER_GUARD];
+static q15_t scratchBuffer[2*N_SAMPLES + 2*2*BUFFER_GUARD];
 
-static int32c * const doutPtr    = doutBuffer    + BUFFER_GUARD;
-static int32c * const dinPtr     = dinBuffer     + BUFFER_GUARD;
-static int32c * const fftcPtr    = fftcBuffer    + BUFFER_GUARD;
-static int32c * const scratchPtr = scratchBuffer + BUFFER_GUARD;
+static q15_t * const doutPtr    = doutBuffer    + 2*BUFFER_GUARD;
+static q15_t * const dinPtr     = dinBuffer     + 2*BUFFER_GUARD;
+static q15_t * const fftcPtr    = fftcBuffer    + 2*BUFFER_GUARD;
+static q15_t * const scratchPtr = scratchBuffer + 2*BUFFER_GUARD;
 
 void setUp(void)
 {
@@ -34,7 +34,57 @@ void tearDown(void)
 {
 }
 
-void testConvertFromQ31(void)
+void testConvertFromQ15(void)
+{
+	q15_t in[2];
+	doublec out;
+
+	in[0] =   0; in[1] =   0;
+	out = convertFromQ15(in);
+	TEST_ASSERT_EQUAL_DOUBLE(  0., out.re);
+	TEST_ASSERT_EQUAL_DOUBLE(  0., out.im);
+
+	in[0] =   1 << 14; in[1] =   0;
+	out = convertFromQ15(in);
+	TEST_ASSERT_EQUAL_DOUBLE(  .5, out.re);
+	TEST_ASSERT_EQUAL_DOUBLE(  0., out.im);
+
+	in[0] =   1 << 13; in[1] =   1 << 12;
+	out = convertFromQ15(in);
+	TEST_ASSERT_EQUAL_DOUBLE(  .25, out.re);
+	TEST_ASSERT_EQUAL_DOUBLE(  .125, out.im);
+}
+
+void testConvertToQ15(void)
+{
+	doublec in;
+	q15_t out[2];
+
+	/* TODO Check rounding for Q15 conversion */
+
+	in.re =   0.; in.im =   0.;
+	convertToQ15(in, out);
+	TEST_ASSERT_EQUAL_INT16(  0, out[0]);
+	TEST_ASSERT_EQUAL_INT16(  0, out[1]);
+
+	in.re =   .5; in.im =   0.;
+	convertToQ15(in, out);
+	TEST_ASSERT_EQUAL_INT16(  1 << 14, out[0]);
+	TEST_ASSERT_EQUAL_INT16(  0, out[1]);
+
+	in.re =   .25; in.im =   .125;
+	convertToQ15(in, out);
+	TEST_ASSERT_EQUAL_INT16(  1 << 13, out[0]);
+	TEST_ASSERT_EQUAL_INT16(  1 << 12, out[1]);
+
+	in.re =   .75 + (1.1 / 4294967296.); in.im =   .125;
+	convertToQ15(in, out);
+	TEST_ASSERT_EQUAL_INT16(  3 << 13, out[0]);
+	TEST_ASSERT_EQUAL_INT16(  1 << 12, out[1]);
+}
+
+#if 0
+//void testConvertFromQ31(void)
 {
 	int32c in;
 	doublec out;
@@ -55,7 +105,7 @@ void testConvertFromQ31(void)
 	TEST_ASSERT_EQUAL_DOUBLE(  .125, out.im);
 }
 
-void testConvertToQ31(void)
+//void testConvertToQ31(void)
 {
 	doublec in;
 	int32c out;
@@ -82,6 +132,7 @@ void testConvertToQ31(void)
 	TEST_ASSERT_EQUAL_INT32(  3 << 29, out.re);
 	TEST_ASSERT_EQUAL_INT32(  1 << 28, out.im);
 }
+#endif
 
 void testAddComplex(void)
 {
@@ -164,8 +215,8 @@ static void checkBufferGuards(void)
 		(char *)fftcBuffer,
 		(char *)scratchBuffer,
 	};
-	static const int bufferGuardBytes = BUFFER_GUARD * sizeof(int32c);
-	static const int nSamplesBytes = N_SAMPLES * sizeof(int32c);
+	static const int bufferGuardBytes = BUFFER_GUARD * sizeof(q15_t)*2;
+	static const int nSamplesBytes = N_SAMPLES * sizeof(q15_t)*2;
 	size_t i;
 	int j;
 	char *buffer;
@@ -179,15 +230,14 @@ static void checkBufferGuards(void)
 	}
 }
 
-static void checkBufferContents(const int32c *expected, const int32c *buffer, int log2N, const char *msg)
+static void checkBufferContents(const q15_t *expected, const q15_t *buffer, int log2N, const char *msg)
 {
 	int samples = 1 << log2N;
 	int i;
 
-	for(i = 0; i < samples; i++) {
+	for(i = 0; i < samples*2; i++) {
 		/* XXX There seems to be an off-by-one rounding error somewhere */
-		TEST_ASSERT_INT_WITHIN_MESSAGE(1, expected[i].re, buffer[i].re, msg);
-		TEST_ASSERT_INT_WITHIN_MESSAGE(1, expected[i].im, buffer[i].im, msg);
+		TEST_ASSERT_INT16_WITHIN_MESSAGE(1, expected[i], buffer[i], msg);
 	}
 }
 
@@ -205,13 +255,13 @@ static void printBufferContents(const int32c *buffer, int log2N, const char *nam
 }
 #endif
 
-static const int32c dinZero[N_SAMPLES] = { { 0, 0 }, };
+static const q15_t dinZero[N_SAMPLES*2] = { 0, };
 
-static void loadBuffer(int32c *buffer, const int32c *contents)
+static void loadBuffer(q15_t *buffer, const q15_t *contents)
 {
 	int i;
 
-	for(i = 0; i < N_SAMPLES; i++)
+	for(i = 0; i < N_SAMPLES*2; i++)
 		buffer[i] = contents[i];
 }
 
@@ -230,10 +280,10 @@ void testBufferChecks(void)
 void testBufferCheckBoundaries(void)
 {
 	TEST_IGNORE();
-	(dinPtr - 1)->re = 0;
-	(dinPtr - 1)->im = 0;
-	(dinPtr + N_SAMPLES)->re = 0;
-	(dinPtr + N_SAMPLES)->im = 0;
+	*(dinPtr - 1*2) = 0;
+	*(dinPtr - 1*2+1) = 0;
+	*(dinPtr + N_SAMPLES*2) = 0;
+	*(dinPtr + N_SAMPLES*2+1) = 0;
 	checkBufferGuards();
 }
 
@@ -251,15 +301,15 @@ void testOneSampleFFT(void)
 	int32_t i;
 
 	for(i = 0; i < 32; i++) {
-		dinPtr->re = i; dinPtr->im = 0;
+		dinPtr[0] = i; dinPtr[1] = 0;
 		/* Check FFT with a sample size of 2^0 = 1 */
 		mips_fft32(doutPtr, dinPtr, fftcPtr, scratchPtr, 0);
-		TEST_ASSERT_EQUAL_INT32(i, doutPtr->re);
-		TEST_ASSERT_EQUAL_INT32(0, doutPtr->im);
+		TEST_ASSERT_EQUAL_INT16(i, doutPtr[0]);
+		TEST_ASSERT_EQUAL_INT16(0, doutPtr[1]);
 	}
 
 	/* Verify no buffer overrun from mips_fft32() */
-	TEST_ASSERT_EQUAL_INT(UNUSED_BYTE, *(char *)(dinPtr+1));
+	TEST_ASSERT_EQUAL_INT(UNUSED_BYTE, *(char *)(dinPtr+1*2));
 
 	checkBufferGuards();
 }
@@ -269,18 +319,18 @@ void testTwoSampleFFT(void)
 	int32_t i;
 
 	for(i = 0; i < 32; i++) {
-		dinPtr[0].re = i; dinPtr[0].im = 0;
-		dinPtr[1].re = i; dinPtr[1].im = 0;
+		dinPtr[0*2] = i; dinPtr[0*2+1] = 0;
+		dinPtr[1*2] = i; dinPtr[1*2+1] = 0;
 		/* Check FFT with a sample size of 2^1 = 2 */
 		mips_fft32(doutPtr, dinPtr, fftcPtr, scratchPtr, 1);
-		TEST_ASSERT_EQUAL_INT32(i, doutPtr[0].re);
-		TEST_ASSERT_EQUAL_INT32(0, doutPtr[0].im);
-		TEST_ASSERT_EQUAL_INT32(0, doutPtr[1].re);
-		TEST_ASSERT_EQUAL_INT32(0, doutPtr[1].im);
+		TEST_ASSERT_EQUAL_INT16(i, doutPtr[0*2+0]);
+		TEST_ASSERT_EQUAL_INT16(0, doutPtr[0*2+1]);
+		TEST_ASSERT_EQUAL_INT16(0, doutPtr[1*2+0]);
+		TEST_ASSERT_EQUAL_INT16(0, doutPtr[1*2+1]);
 	}
 
 	/* Verify no buffer overrun from mips_fft32() */
-	TEST_ASSERT_EQUAL_INT(UNUSED_BYTE, *(char *)(dinPtr+2));
+	TEST_ASSERT_EQUAL_INT(UNUSED_BYTE, *(char *)(dinPtr+2*2));
 
 	checkBufferGuards();
 }

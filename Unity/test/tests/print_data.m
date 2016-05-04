@@ -1,5 +1,5 @@
 function print_data(file, signal_int)
-    formatstr = '\t{%11d, %11d}';
+    formatstr = '\t%11d, %11d';
     data = '';
     k = 0;
     for i = signal_int
