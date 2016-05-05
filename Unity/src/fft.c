@@ -62,7 +62,7 @@ void mips_fft32(q15_t *dout, q15_t *din, q15_t *twiddles, q15_t *scratch, int lo
 	int k;
 	double theta;
 	doublec dinReal, doutReal;
-	doublec e, p;
+	//doublec e, p;
 	doublec sum;
 
 	(void)twiddles[0]; /* Stop unused warnings */
@@ -73,8 +73,8 @@ void mips_fft32(q15_t *dout, q15_t *din, q15_t *twiddles, q15_t *scratch, int lo
 		for(k = 0; k < samples; k++) {
 			dinReal = convertFromQ15(&din[k*2]);
 			theta = -2. * M_PI * (double)k * (double)n / (double)samples;
-			e = complexExp(theta);
-			p = complexMultiply(dinReal, e);
+			//e = complexExp(theta);
+			//p = complexMultiply(dinReal, e);
 			//printf("n:%2d, k:%2d, theta = %f, exp(%f, %f)\n", n, k, theta, e.re, e.im);
 			//printf("n:%2d, k:%2d, din(%f, %f) X exp(%f, %f) = p(%f, %f)\n", n, k, dinReal.re, dinReal.im, e.re, e.im, p.re, p.im);
 			sum = complexAdd(sum, complexMultiply(dinReal, complexExp(theta)));
@@ -126,7 +126,7 @@ const char *filein = "signal.bin";
 const char *fileout = "fft.bin";
 
 //int main(int argc, char **argv)
-int main2()
+int main2(void)
 {
 	FILE *fp;
 
